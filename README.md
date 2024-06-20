@@ -11,6 +11,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 1. make sure all env support 
 2. npm install 
 3. ng serve
+4. login with Username: admin, Password: admin
 
 
 
