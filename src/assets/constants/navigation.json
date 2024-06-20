@@ -1,0 +1,12 @@
+[
+    {
+        "label":"Dashboard",
+        "path":"/",
+        "exact": true
+    },
+    {
+        "label":"Employee",
+        "path":"/employee",
+        "exact": false
+    }
+]

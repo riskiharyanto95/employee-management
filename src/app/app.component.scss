@@ -1,0 +1,55 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .main-is-mobile .main-toolbar {
+    position: fixed;
+    z-index: 2;
+  }
+  
+  h1.main-app-name {
+    margin-left: 8px;
+  }
+ 
+  .main-sidenav-container {
+    flex: 1;
+  }
+  .mat-drawer{
+    border-top-right-radius:0px!important;
+    border-bottom-right-radius:0px!important;
+    visibility: visible!important;
+    border-right:3px solid #f4edfa;
+
+    .mat-mdc-nav-list .mat-mdc-list-item {
+      border-radius: 0px;
+    }
+    .active-nav{
+      background-color: #e0dfe3!important;
+      opacity: 1!important;
+    }
+  }
+ 
+  .mdc-list{
+    padding: 0px;
+  }
+
+  .mat-drawer-content{
+    padding: 20px;
+    background-color: #faf7fc;
+  }
+  
+  .main-is-mobile .main-sidenav-container {
+    flex: 1 0 auto;
+  }
+
+  .menu-position{
+    position: absolute;
+    right: 30px;
+  }
+  

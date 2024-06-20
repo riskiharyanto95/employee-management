@@ -1,0 +1,30 @@
+.content-card{
+    padding: 30px;
+}
+
+.add-employee{
+    width: 140px;
+    margin-bottom: 10px;
+}
+.section-right{
+    display: flex;
+    justify-content: flex-end;
+    // margin-top: 10px;
+    // margin-bottom: 10px;
+    .item-right{
+        margin-left: 10px; 
+    }
+    .item-right .button-action{
+        width: 140px;
+    }
+}
+
+table {
+    margin-top: 10px;
+    width: 100%;
+    .item-table{
+        cursor: pointer;
+    }
+}
+
+

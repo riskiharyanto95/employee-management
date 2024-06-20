@@ -1,0 +1,109 @@
+<mat-card class="content-card">
+  <button mat-flat-button (click)="gotoAddEmployee()" class="add-employee"><mat-icon>add_circle</mat-icon>Employee</button>
+  <div class="section-right">
+    <div class="item-right">
+      <app-input-field
+        label="Search Username" 
+        type="text" 
+        placeholder="Username" 
+        [(value)]="username"
+      ></app-input-field>
+    </div>
+    <div class="item-right">
+      <app-select-field 
+        label="Search Group"
+        [selectedData]="group"
+        [options]="groupOptions"
+        [valueField]="'value'"
+        [displayField]="'label'"
+        (valueChange)="onGroupChange($event)">
+      </app-select-field>
+    </div>
+    <div class="item-right">
+      <app-date-field
+        label="Search Birth Date"
+        [selectedDate]="birthDate"
+        (valueChange)="onBirthDateChange($event)"
+      ></app-date-field>
+    </div>
+    <div class="item-right">
+      <app-select-field 
+        label="Sort By (Column)"
+        [selectedData]="sortBy"
+        [options]="sortByOptions"
+        [valueField]="'value'"
+        [displayField]="'label'"
+        (valueChange)="onSortByChange($event)">
+      </app-select-field>
+    </div>
+    <div class="item-right">
+      <app-select-field 
+        label="Sort (Asc/Desc)"
+        [selectedData]="sort"
+        [options]="sortOptions"
+        [valueField]="'value'"
+        [displayField]="'label'"
+        (valueChange)="onSortChange($event)">
+      </app-select-field>
+    </div>
+  </div>
+  <div class="section-right">
+    <button mat-flat-button (click)="applyFilterAndSorting()" class="item-right"><mat-icon>search</mat-icon>Search & Sort</button>
+    <button mat-flat-button *ngIf="isShowReset" (click)="resetFilterAndSorting()" class="item-right"><mat-icon>restart_alt</mat-icon>Reset</button>
+  </div>
+  <table mat-table [dataSource]="displayedList" class="mat-elevation-z8">
+      <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.no}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.username}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef> Group </th>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.group}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="basic_salary">
+        <th mat-header-cell *matHeaderCellDef> Basic Salary </th>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.basic_salary}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="birth_date">
+        <th mat-header-cell *matHeaderCellDef> Birth Date </th>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.birth_date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button><mat-icon>visibility</mat-icon></button>
+          <button mat-icon-button><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button><mat-icon>delete</mat-icon></button>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="item-table"></tr>
+    </table>
+    <mat-paginator 
+      [length]="pagination.length"
+      [pageSize]="pagination.countPerPage"
+      [pageSizeOptions]="pagination.countPerPageOptions"
+      aria-label="Select page"
+      (page)="handleChangePage($event)">
+    </mat-paginator>
+</mat-card>
