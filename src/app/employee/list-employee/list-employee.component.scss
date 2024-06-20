@@ -2,15 +2,34 @@
     padding: 30px;
 }
 
+.heade-title{
+    padding: 0px!important;
+    margin-bottom: 30px;
+}
+
+.form-add {
+    min-width: 150px;
+    max-width: 900px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+  
+.form-full-width {
+    width: 100%;
+}
+  
+td {
+    padding-right: 8px;
+}
+
 .add-employee{
     width: 140px;
     margin-bottom: 10px;
 }
+
 .section-right{
     display: flex;
     justify-content: flex-end;
-    // margin-top: 10px;
-    // margin-bottom: 10px;
     .item-right{
         margin-left: 10px; 
     }
@@ -25,6 +44,10 @@ table {
     .item-table{
         cursor: pointer;
     }
+}
+
+.mdc-dialog--open .mat-mdc-dialog-surface{
+    background-color: red!important;
 }
 
 

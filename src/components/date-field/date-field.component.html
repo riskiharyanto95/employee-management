@@ -1,6 +1,6 @@
-<mat-form-field>
-<mat-label>{{ label }}</mat-label>
-<input matInput [matDatepicker]="dp" [formControl]="date" [max]="today" readonly>
-<mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
-<mat-datepicker #dp ></mat-datepicker>
+<mat-form-field [className]="className">
+    <mat-label>{{ label }}</mat-label>
+    <input matInput [matDatepicker]="dp" [formControl]="date" [max]="today" readonly [disabled]="isDisabled">
+    <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp ></mat-datepicker>
 </mat-form-field>

@@ -1,1 +1,18 @@
-<p>login works!</p>
+<div class="login-container">
+    <h2>Login</h2>
+    <h5>Username: admin, Password: admin</h5>
+    <app-input-field
+        label="Input Username" 
+        type="text" 
+        placeholder="Username" 
+        [(value)]="username"
+    ></app-input-field>
+    <app-input-field
+        label="Input Password" 
+        type="text" 
+        placeholder="Password" 
+        [(value)]="password"
+    ></app-input-field>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <button mat-flat-button (click)="login()">Login</button>
+</div>

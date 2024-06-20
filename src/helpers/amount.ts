@@ -5,3 +5,10 @@ export function formatAmountToIDR(amount: number): string {
   
     return `Rp.${integerWithDots},${decimalPart}`;
 }
+
+export function formatIDRToAmount(currency: string): number {
+    let numberString = currency.replace(/[Rp.\s]/g, '');
+    numberString = numberString.replace(',', '.');
+
+    return parseFloat(numberString);
+}

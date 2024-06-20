@@ -1,0 +1,44 @@
+.content-card{
+    padding: 30px;
+}
+
+.heade-title{
+    padding: 0px!important;
+    margin-bottom: 30px;
+}
+
+.form-add {
+    min-width: 150px;
+    max-width: 900px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+  
+.form-full-width {
+    width: 100%;
+}
+  
+td {
+    padding-right: 8px;
+}
+
+.section-right{
+    display: flex;
+    justify-content: flex-end;
+    .item-right{
+        margin-left: 10px; 
+    }
+    .item-right .button-action{
+        width: 140px;
+    }
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

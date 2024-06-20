@@ -18,7 +18,9 @@ export class SelectFieldComponent {
   @Input() label: string = 'Select';
   @Input() valueField: string = 'value';
   @Input() displayField: string = 'label';
+  @Input() className: string = '';
   @Input() selectedData: string = '';
+  @Input() isDisabled: boolean = false;
   @Output() valueChange = new EventEmitter<any>();
 
   controlSearch = new FormControl();

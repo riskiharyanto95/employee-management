@@ -5,8 +5,8 @@ import { GroupInterface, GROUP_DATA } from '../../../assets/constants/groups';
 import { EmployeeInterface, EMPLOYEE_DATA } from '../../../assets/constants/employee';
 import { formatAmountToIDR } from '../../../helpers/amount';
 import { formatDateDDMMYYYY } from '../../../helpers/datetime';
-import { map } from 'rxjs/operators';
-import moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '../../../components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-list-employee',
@@ -15,7 +15,7 @@ import moment from 'moment';
 })
 
 export class ListEmployeeComponent {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {}
 
   originalEmployeeList: EmployeeInterface[] = EMPLOYEE_DATA;
   resultList: EmployeeInterface[] = [];
@@ -28,6 +28,10 @@ export class ListEmployeeComponent {
     {value: 'asc', label: 'Ascending (A-Z)'},
     {value: 'desc', label: 'Descending (Z-A)'}
   ];
+  statusOptions : any = [
+    {value: 'Inactive', label: 'Inactive'},
+    {value: 'Active', label: 'Active'}
+  ];
 
   displayedColumns: string[] = ['no', 'username', 'email', 'group', 'basic_salary','birth_date', 'status', 'action'];
   displayedList: any = [];
@@ -37,6 +41,7 @@ export class ListEmployeeComponent {
     countPerPage: 10,
     countPerPageOptions: [5, 10, 25, 100]
   };
+  isListMode: boolean = true;
   isLoading: boolean = false;
   isShowReset: boolean = false;
   username: string = "";
@@ -51,12 +56,54 @@ export class ListEmployeeComponent {
     sorty_by: null,
     sort: null,
   }
+  details: any = {
+    username: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    group: "",
+    basicSalary: 0,
+    birthDate: "",
+    description: "",
+    status:"",
+  }
   
   gotoAddEmployee() {
     this.router.navigate(['/employee/add']);
   }
 
-  gotoDetailEmployee(id: Number) {
+  gotoListEmployee() {
+    this.isListMode = true;
+  }
+
+  gotoEditEmployee(): void {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '550px',
+      data: { title: 'Edit Data', content: 'Apakah anda yakin akan mengubah data?' }
+    });
+  }
+
+  gotoDeleteEmployee(): void {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '550px',
+      data: { title: 'Delete Data', content: 'Apakah anda yakin akan menghapus data?' }
+    });
+  }
+
+  gotoDetailEmployee(employee: any) {
+    this.details = {
+      username: employee.username,
+      email:employee.email,
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      group: employee.groups,
+      basicSalary: employee.basic_salary,
+      birthDate: this.convertDate(employee.birthDate),
+      description: this.convertDate(employee.description),
+      status: employee.status,
+    }
+
+    this.isListMode = false;
   }
 
   getGroupLabel(groupValue: string): string {
@@ -68,14 +115,18 @@ export class ListEmployeeComponent {
     this.group = group;
   }
 
-  onBirthDateChange(date: Date){
+  convertDate(date: Date){
     const selectedDate = new Date(date)
     const year = selectedDate.getFullYear();
     const month = ('0' + (selectedDate.getMonth() + 1)).slice(-2);
     const day = ('0' + selectedDate.getDate()).slice(-2);
     const convertedDate = `${year}-${month}-${day}`;
-    
-    this.birthDate = convertedDate;
+
+    return convertedDate
+  }
+
+  onBirthDateChange(date: Date){
+    this.birthDate = this.convertDate(date)
   }
 
   onSortByChange(sortBy: any){
@@ -234,9 +285,15 @@ export class ListEmployeeComponent {
         id: employee.id,
         username: employee.username,
         email: employee.email,
+        firstName: employee.firstName,
+        lastName: employee.lastName,
         group: groupLabel,
+        groups: employee.group,
         basic_salary: formatAmountToIDR(employee.basicSalary),
+        basicSalary: employee.basicSalary,
         birth_date: formatDateDDMMYYYY(employee.birthDate),
+        birthDate: employee.birthDate,
+        description: employee.description,
         status: employee.status,
         action: '',
       })

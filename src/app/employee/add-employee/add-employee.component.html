@@ -1,1 +1,106 @@
-<p>add-employee works!</p>
+<mat-card class="content-card">
+    <mat-card-header class="heade-title">
+        <mat-card-title> Form Add Employee</mat-card-title>
+        <mat-card-subtitle>Semua data harus dilengkapi</mat-card-subtitle>
+    </mat-card-header>
+    <form class="form-add">
+        <table class="form-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <app-input-field
+                        label="Input Username" 
+                        className="form-full-width"
+                        type="text" 
+                        placeholder="Username" 
+                        [(value)]="username"
+                    ></app-input-field>
+                </td>
+                <td>
+                    <app-input-field
+                        label="Input Email" 
+                        className="form-full-width"
+                        type="email" 
+                        placeholder="Email" 
+                        [(value)]="email"
+                    ></app-input-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <app-input-field
+                        label="Input Firstname" 
+                        className="form-full-width"
+                        type="text" 
+                        placeholder="Firstname" 
+                        [(value)]="firstName"
+                    ></app-input-field>
+                </td>
+                <td>
+                    <app-input-field
+                        label="Input Lastname" 
+                        className="form-full-width"
+                        type="text" 
+                        placeholder="Lastname" 
+                        [(value)]="lastName"
+                    ></app-input-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <app-input-field
+                        label="Input Basic Salary" 
+                        className="form-full-width"
+                        type="number" 
+                        placeholder="Basic Salary" 
+                        [(value)]="basicSalary"
+                    ></app-input-field>
+                </td>
+                <td>
+                    <app-select-field 
+                        className="form-full-width"
+                        label="Select Group"
+                        [selectedData]="group"
+                        [options]="groupOptions"
+                        [valueField]="'value'"
+                        [displayField]="'label'"
+                        (valueChange)="onGroupChange($event)">
+                    </app-select-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <app-date-field
+                        label="Select Birth Date"
+                        [selectedDate]="birthDate"
+                        (valueChange)="onBirthDateChange($event)"
+                    ></app-date-field>
+                </td>
+                <td>
+                    <app-date-field
+                        label="Select Description"
+                        [selectedDate]="description"
+                        (valueChange)="onDescriptionChange($event)"
+                    ></app-date-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <app-select-field 
+                        className="form-full-width"
+                        label="Select Status"
+                        [selectedData]="status"
+                        [options]="statusOptions"
+                        [valueField]="'value'"
+                        [displayField]="'label'"
+                        (valueChange)="onStatusChange($event)">
+                    </app-select-field>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="section-right">
+        <button mat-flat-button class="item-right" (click)="validateData()"><mat-icon>save</mat-icon>Simpan Data</button>
+        <button mat-flat-button class="item-right" (click)="resetData()"><mat-icon>restart_alt</mat-icon>Reset Data</button>
+        <button mat-flat-button class="item-right" (click)="gotoListEmployee()"><mat-icon>undo</mat-icon>Kembali</button>
+    </div>
+</mat-card>

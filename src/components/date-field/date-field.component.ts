@@ -30,6 +30,8 @@ export const MY_FORMATS = {
 export class DateFieldComponent implements OnChanges {
   @Input() label: string = 'Pilih Tanggal';
   @Input() selectedDate: string = '';
+  @Input() className: string = '';
+  @Input() isDisabled: boolean = false;
   @Output() valueChange = new EventEmitter<any>();
 
   date = new FormControl<Date | null>(null);

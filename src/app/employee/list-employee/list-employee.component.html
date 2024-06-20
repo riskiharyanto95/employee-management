@@ -1,8 +1,9 @@
-<mat-card class="content-card">
+<mat-card class="content-card" *ngIf="isListMode">
   <button mat-flat-button (click)="gotoAddEmployee()" class="add-employee"><mat-icon>add_circle</mat-icon>Employee</button>
   <div class="section-right">
     <div class="item-right">
       <app-input-field
+        className="item-right"
         label="Search Username" 
         type="text" 
         placeholder="Username" 
@@ -54,45 +55,45 @@
   <table mat-table [dataSource]="displayedList" class="mat-elevation-z8">
       <ng-container matColumnDef="no">
         <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.no}} </td>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element)"> {{element.no}} </td>
       </ng-container>
     
       <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.username}} </td>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element)"> {{element.username}} </td>
       </ng-container>
     
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.email}} </td>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element)"> {{element.email}} </td>
       </ng-container>
 
       <ng-container matColumnDef="group">
         <th mat-header-cell *matHeaderCellDef> Group </th>
-        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.group}} </td>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element)"> {{element.group}} </td>
       </ng-container>
 
       <ng-container matColumnDef="basic_salary">
         <th mat-header-cell *matHeaderCellDef> Basic Salary </th>
-        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.basic_salary}} </td>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element)"> {{element.basic_salary}} </td>
       </ng-container>
 
       <ng-container matColumnDef="birth_date">
         <th mat-header-cell *matHeaderCellDef> Birth Date </th>
-        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.birth_date}} </td>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element)"> {{element.birth_date}} </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element.id)"> {{element.status}} </td>
+        <td mat-cell *matCellDef="let element" (click)="gotoDetailEmployee(element)"> {{element.status}} </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-icon-button><mat-icon>visibility</mat-icon></button>
-          <button mat-icon-button><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button><mat-icon>delete</mat-icon></button>
+        <td mat-cell *matCellDef="let element" >
+          <button mat-icon-button (click)="gotoDetailEmployee(element)"><mat-icon>visibility</mat-icon></button>
+          <button mat-icon-button (click)="gotoEditEmployee()"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button (click)="gotoDeleteEmployee()"><mat-icon>delete</mat-icon></button>
         </td>
       </ng-container>
     
@@ -106,4 +107,103 @@
       aria-label="Select page"
       (page)="handleChangePage($event)">
     </mat-paginator>
+</mat-card>
+<mat-card class="content-card" *ngIf="!isListMode">
+  <mat-card-header class="heade-title">
+      <mat-card-title> Detail Employee</mat-card-title>
+  </mat-card-header>
+  <form class="form-add">
+      <table class="form-full-width" cellspacing="0">
+          <tr>
+              <td>
+                  <app-input-field
+                      label="Username" 
+                      className="form-full-width"
+                      type="text" 
+                      placeholder="Username" 
+                      [(value)]="details.username"
+                  ></app-input-field>
+              </td>
+              <td>
+                  <app-input-field
+                      label="Email" 
+                      className="form-full-width"
+                      type="email" 
+                      placeholder="Email" 
+                      [(value)]="details.email"
+                  ></app-input-field>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <app-input-field
+                      label="Firstname" 
+                      className="form-full-width"
+                      type="text" 
+                      placeholder="Firstname" 
+                      [(value)]="details.firstName"
+                  ></app-input-field>
+              </td>
+              <td>
+                  <app-input-field
+                      label="Lastname" 
+                      className="form-full-width"
+                      type="text" 
+                      placeholder="Lastname" 
+                      [(value)]="details.lastName"
+                  ></app-input-field>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <app-input-field
+                      label="Basic Salary" 
+                      className="form-full-width"
+                      type="text" 
+                      placeholder="Basic Salary" 
+                      [(value)]="details.basicSalary"
+                  ></app-input-field>
+              </td>
+              <td>
+                  <app-select-field 
+                      className="form-full-width"
+                      label="Group"
+                      [selectedData]="details.group"
+                      [options]="groupOptions"
+                      [valueField]="'value'"
+                      [displayField]="'label'">
+                  </app-select-field>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <app-date-field
+                      label="Birth Date"
+                      [selectedDate]="details.birthDate"
+                  ></app-date-field>
+              </td>
+              <td>
+                  <app-date-field
+                      label="Description"
+                      [selectedDate]="details.description"
+                  ></app-date-field>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <app-select-field 
+                      className="form-full-width"
+                      label="Status"
+                      [selectedData]="details.status"
+                      [options]="statusOptions"
+                      [valueField]="'value'"
+                      [displayField]="'label'">
+                  </app-select-field>
+              </td>
+          </tr>
+      </table>
+  </form>
+  <div class="section-right">
+      <button mat-flat-button class="item-right" (click)="gotoListEmployee()"><mat-icon>check_circle</mat-icon>Ok</button>
+  </div>
 </mat-card>

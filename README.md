@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
 
+## Environment
+1. Node version 18.19.1
+2. Angular CLI version 18.0.4
+3. NPM version 10.2.4
+
+## How to Run Local ? 
+1. make sure all env support 
+2. npm install 
+3. ng serve
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

@@ -1,6 +1,6 @@
-<mat-form-field>
+<mat-form-field [className]="className">
   <mat-label>{{ label }}</mat-label>
-  <mat-select [(value)]="selectedData" (selectionChange)="onSelectionChange($event)">
+  <mat-select [(value)]="selectedData" (selectionChange)="onSelectionChange($event)" [disabled]="isDisabled">
     <mat-option>
       <ngx-mat-select-search [formControl]="controlSearch" placeholderLabel="Search" noEntriesFoundLabel="Data tidak ada"></ngx-mat-select-search>
     </mat-option>
